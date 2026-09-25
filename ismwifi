@@ -377,7 +377,8 @@ show_status() {
 
 uninstall_tool() {
     echo -e "${YELLOW}Uninstalling ismwifi...${NC}"
-    kill_service
+    perform_logout
+    systemctl --user disable "$SERVICE_NAME" 2>/dev/null || true
 
     rm -f "$SYSTEMD_FILE"
     systemctl --user daemon-reload 2>/dev/null || true
